@@ -115,7 +115,7 @@ def preprocess_dataset(data, tokenizer, max_length, test_split=0.01):
     preprocessed_data = []
     for i in tqdm(range(len(data)), desc="Preprocessing dataset"):
         question = SYSTEM_PROMPT + "\n\n" + data[i]["question"]
-        trajectory = f"<reasoning>{data[i]['thinking_trajectories'][0]}</reasoning>\n<answer>{data[i]['attempt']}</answer>"
+        trajectory = f"<reasoning>{data[i]['deepseek_thinking_trajectory']}</reasoning>\n<answer>{data[i]['deepseek_attempt']}</answer>"
         prompt = [{"role": "user", "content": question}]
         response = [{"role": "assistant", "content": trajectory}]
         inputs = tokenizer.apply_chat_template(prompt + response, tokenize=False)
